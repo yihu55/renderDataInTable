@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>render data in table</title>
+    <style>
+     #wrapper{
+       display: flex;
+       justify-content: space-around;
+     }
+      section h1{
+          background: #009578;
+          color:#ffffff;
+          text-align: center;
+      }
+     li{
+          padding:10px 20px;
+          list-style: none;
+      }
+      li:nth-of-type(even){
+          background:#eeeeee;
+      }
+      li:last-of-type{
+          border-bottom: 2px solid #009578;
+      }
+   </style>
+</head>
+<body>
+
+<div id="wrapper">
+</div>
+
+<script>
+
+const data=[{"id":"sign-up-form","name":"Sign-Up Form","category":"HTML"},{"id":"item-cart","name":"Item Cart","category":"HTML"},{"id":"spaghetti-recipe","name":"Spaghetti Recipe","category":"HTML"},{"id":"blog-post","name":"Blog Post","category":"HTML"},{"id":"rainbow-circles","name":"Rainbow Circles","category":"CSS"},{"id":"navbar","name":"Navbar","category":"CSS"},{"id":"pig-emoji","name":"Pig Emoji","category":"CSS"},{"id":"purchase-form","name":"Purchase Form","category":"CSS"},{"id":"algoexpert-products","name":"AlgoExpert Products","category":"CSS"},{"id":"testing-framework","name":"Testing Framework","category":"JavaScript"},{"id":"array-methods","name":"Array Methods","category":"JavaScript"},{"id":"event-target","name":"Event Target","category":"JavaScript"},{"id":"debounce","name":"Debounce","category":"JavaScript"},{"id":"this-binding","name":"This Binding","category":"JavaScript"},{"id":"promisify","name":"Promisify","category":"JavaScript"},{"id":"throttle","name":"Throttle","category":"JavaScript"},{"id":"curry","name":"Curry","category":"JavaScript"},{"id":"infinite-scroll","name":"Infinite Scroll","category":"DOM Manipulation"},{"id":"stopwatch","name":"Stopwatch","category":"DOM Manipulation"},{"id":"tic-tac-toe","name":"Tic Tac Toe","category":"DOM Manipulation"},{"id":"todo-list","name":"Todo List","category":"DOM Manipulation"},{"id":"typeahead","name":"Typeahead","category":"DOM Manipulation"},{"id":"tier-list","name":"Tier List","category":"DOM Manipulation"},{"id":"toasts","name":"Toasts","category":"DOM Manipulation"},{"id":"sudoku","name":"Sudoku","category":"DOM Manipulation"},{"id":"questions-list","name":"Questions List","category":"DOM Manipulation"}]
+
+//sort data with same category return object with key and values in array {HTML: Array(4), CSS: Array(5),
+//JavaScript: Array(8), DOM Manipulation: Array(9)}
+const results = data.reduce((acc, obj) => {
+  return {...acc, [obj.category]: [...acc[obj.category] || [], obj]}
+}, {})
+
+const wrapper=document.getElementById('wrapper')
+
+
+Object.entries(results).forEach(([key, value]) => {
+  const section=document.createElement('section')
+  //create h1 for section
+  const h1=document.createElement('h1')
+  h1.innerHTML=key
+  //append h1 in section then append to wrapper
+  section.append(h1)
+  //wrapper.append(section)
+
+  //loop through value arrays
+    value.forEach(v=>{
+      //create li for a section 
+      const li=document.createElement('li')
+      li.innerHTML=v.name
+      section.append(li)
+    
+    })
+    wrapper.append(section)
+ })
+
+</script>
+</body>
+</html>
